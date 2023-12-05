@@ -1,15 +1,21 @@
 #include "raylib.h"
+#include "player.h"
+#include <iostream>
+
+const int RES_X = 1920;
+const int RES_Y = 1080;
 
 int main()
 {
-    InitWindow(800, 600, "Best Pong Ever");
-    BeginDrawing();
+    InitWindow(RES_X, RES_Y, "Best Pong Ever");
+
+    Player *player = new Player(100, 100, (RES_X / 2) - 200, (RES_Y / 2) + 200, BLACK);
     
     while(!WindowShouldClose())
     {
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            DrawText("Hello Pong!", 400, 300, 21, BLACK);
+            player->Render();
         EndDrawing();
     }
 
