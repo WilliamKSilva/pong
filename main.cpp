@@ -13,12 +13,12 @@ void HandleInput(Player *player)
 {
     if (IsKeyPressed(KEY_W))
     {
-        player->shape->y -= 100;
+        player->shape.y -= 100;
     }
 
     if (IsKeyPressed(KEY_S))
     {
-        player->shape->y += 100;
+        player->shape.y += 100;
     }
 }
 

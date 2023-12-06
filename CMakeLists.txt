@@ -8,5 +8,5 @@ set(SOURCE_FILES main.cpp player.cpp ball.cpp)
 
 add_executable(Pong ${SOURCE_FILES})
 
-add_subdirectory(/usr/lib/raylib /usr/lib/raylib/src)
+add_subdirectory(/usr/local/lib/raylib /usr/local/lib/raylib/src)
 target_link_libraries(Pong raylib)
