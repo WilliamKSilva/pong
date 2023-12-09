@@ -22,6 +22,19 @@ void HandleInput(Player *player)
     }
 }
 
+void HandleBallMovement(Ball *ball)
+{
+    if (IsKeyPressed(KEY_LEFT))
+    {
+        ball->position.x -= 100;
+    }
+
+    if (IsKeyPressed(KEY_RIGHT))
+    {
+        ball->position.x += 100;
+    }
+}
+
 int main()
 {
     InitWindow(RES_X, RES_Y, "Best Pong Ever");
@@ -38,10 +51,17 @@ int main()
     while(!WindowShouldClose())
     {
         HandleInput(player);
+        HandleBallMovement(ball);
         BeginDrawing();
             ClearBackground(RAYWHITE);
             DrawRectangle(opponent->x, opponent->y, opponent->width, opponent->height, BLACK);
             ball->Render();
+            Collision collision = ball->DetectCollision(player->shape);
+            if (collision.collide)
+            {
+            std::cout << "asiudhisaud" << std::endl;
+            }
+            
             player->Render();
         EndDrawing();
     }
