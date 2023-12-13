@@ -18,7 +18,7 @@ void Ball::Render()
 Collision Ball::DetectCollision(Rectangle rec)
 {
     Vector2 center = Vector2AddValue(this->position, this->radius);
-    Vector2 recHalfExtent = Vector2({ rec.x / 2.0f, rec.y / 2.0f });
+    Vector2 recHalfExtent = Vector2({ rec.width / 2.0f, rec.height / 2.0f });
     Vector2 recCenter = Vector2({ rec.x + recHalfExtent.x, rec.y + recHalfExtent.y });
     Vector2 difference = Vector2Subtract(center, recCenter); 
     Vector2 clamped = Vector2Clamp(difference, Vector2Negate(recHalfExtent), recHalfExtent);
