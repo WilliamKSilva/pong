@@ -26,16 +26,6 @@ void ResetGameObjectPosition(Vector2 &position) {
   position.x = RES_X / 2.0 + 10;
 }
 
-void HandleBallMovement(Ball *ball) {
-  if (IsKeyPressed(KEY_LEFT)) {
-    ball->position.x -= 100;
-  }
-
-  if (IsKeyPressed(KEY_RIGHT)) {
-    ball->position.x += 100;
-  }
-}
-
 int main() {
   InitWindow(RES_X, RES_Y, "Best Pong Ever");
   Player *player = new Player(RECT_WIDTH, RECT_HEIGHT, (RES_X / 2) - 500,
