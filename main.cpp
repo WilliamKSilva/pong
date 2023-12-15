@@ -11,11 +11,11 @@ const int RECT_HEIGHT = 150;
 
 void HandleInput(Player *player) {
   if (IsKeyDown(KEY_W)) {
-    player->shape.y -= 20;
+    player->shape.y -= 10;
   }
 
   if (IsKeyDown(KEY_S)) {
-    player->shape.y += 20;
+    player->shape.y += 10;
   }
 }
 

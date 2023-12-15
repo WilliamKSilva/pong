@@ -37,7 +37,7 @@ void Ball::Move() {
       newPosition.y += this->speed.y;
     }
 
-    if (lastCollision->point.y >= 15) {
+    if (lastCollision->point.y >= 18) {
       newPosition.y -= this->speed.y;
     }
   }
