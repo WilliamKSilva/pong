@@ -1,8 +1,16 @@
 #include "raylib.h"
 
-struct Collision {
+struct CollisionObject {
     bool collide;
+    bool movingLeft;
     Vector2 point;
+};
+
+struct CollisionTopAndBottom {
+    Vector2 point;
+    bool movingLeft;
+    bool top;
+    bool collide;
 };
 
 class Ball
@@ -13,8 +21,10 @@ class Ball
     Vector2 speed;
     float radius;
     Color color;
-    Collision *lastCollision; 
+    CollisionObject *objectCollision; 
+    CollisionTopAndBottom *topBottomCollision; 
     void Render();
     void Move();
-    Collision DetectCollision(Rectangle rec);
+    CollisionObject ObjectCollision(Rectangle rec);
+    CollisionTopAndBottom TopAndBottomCollision();
 };

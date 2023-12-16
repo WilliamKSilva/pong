@@ -8,6 +8,8 @@ Ball::Ball(int x, int y, float radius, Color color) {
   this->position.y = y;
   this->radius = radius;
   this->color = color;
+  this->objectCollision = NULL;
+  this->topBottomCollision = NULL;
 }
 
 void Ball::Render() { DrawCircleV(position, radius, color); }
@@ -17,36 +19,60 @@ void Ball::Move() {
   newPosition.x = this->position.x;
   newPosition.y = this->position.y;
 
-  // X axis
   bool right = this->position.x >= GetScreenWidth() / 2.0;
 
-  // If has an lastCollision will bounce to the opposite direction
-  if (lastCollision != NULL) {
-    if (right) {
+  // If has an Object Collision will bounce to the opposite direction
+  if (objectCollision != NULL) {
+
+    // X Axis
+    if (objectCollision->movingLeft) {
       newPosition.x -= this->speed.x;
     } else {
       newPosition.x += this->speed.x;
     }
-  } else {
-    newPosition.x -= this->speed.x;
-  }
 
-  // Y axis
-  if (lastCollision != NULL) {
-    if (lastCollision->point.y <= -15) {
+    // Y Axis
+    if (objectCollision->point.y <= -15) {
       newPosition.y += this->speed.y;
     }
 
-    if (lastCollision->point.y >= 18) {
+    if (objectCollision->point.y >= 18) {
       newPosition.y -= this->speed.y;
     }
+  } else {
   }
+
+  // First movement
+  if (objectCollision == NULL && topBottomCollision == NULL)
+  {
+    newPosition.x -= this->speed.x;
+  }
+
+  if (topBottomCollision != NULL)
+  {
+    if (topBottomCollision->top)
+    {
+      newPosition.y += this->speed.y;
+    } else {
+      newPosition.y -= this->speed.y;
+    }
+
+    if (topBottomCollision->movingLeft)
+    {
+      newPosition.x -= this->speed.x;
+    } else {
+      newPosition.x += this->speed.x;
+    }
+  }
+
+  std::cout << newPosition.x << std::endl;
 
   this->position.x = newPosition.x;
   this->position.y = newPosition.y;
 }
 
-Collision Ball::DetectCollision(Rectangle rec) {
+CollisionObject Ball::ObjectCollision(Rectangle rec) {
+  bool right = this->position.x >= GetScreenWidth() / 2.0;
   Vector2 center = Vector2AddValue(this->position, this->radius);
   Vector2 recHalfExtent = Vector2({rec.width / 2.0f, rec.height / 2.0f});
   Vector2 recCenter =
@@ -57,6 +83,32 @@ Collision Ball::DetectCollision(Rectangle rec) {
 
   Vector2 closest = Vector2Add(recCenter, clamped);
   difference = Vector2Subtract(closest, center);
-  bool collide = Vector2Length(difference) <= this->radius;
-  return Collision{collide, clamped};
+  bool collide = Vector2Length(difference) < this->radius;
+
+  return CollisionObject{collide, right, clamped};
+}
+
+CollisionTopAndBottom Ball::TopAndBottomCollision() {
+  bool movingRight = false;
+
+  if (objectCollision != NULL)
+  {
+    movingRight = objectCollision->movingLeft; 
+  }
+
+  bool top = this->position.y <= 0;
+  bool bottom = this->position.y >= 1080;
+
+  if (top) {
+    return CollisionTopAndBottom{
+        {this->position.x, this->position.y}, movingRight, true, true};
+  }
+
+  if (bottom) {
+    return CollisionTopAndBottom{
+        {this->position.x, this->position.y}, movingRight, false, true};
+  }
+
+  return CollisionTopAndBottom{
+      {this->position.x, this->position.y}, movingRight, false, false};
 }
