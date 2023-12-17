@@ -7,6 +7,7 @@ Player::Player(int width, int height, int posX, int posY, Color color) {
   this->width = width;
   this->height = height;
   this->color = color;
+  this->score = 0;
 };
 
 void Player::Render()
@@ -22,4 +23,8 @@ void Player::HandleInput() {
   if (IsKeyDown(KEY_S)) {
     this->position.y += 10;
   }
+}
+
+void Player::UpdateScore() {
+  this->score += 1;
 }
