@@ -25,6 +25,7 @@ class Ball
     CollisionTopAndBottom *topBottomCollision; 
     void Render();
     void Move();
+    void ResetPosition();
     CollisionObject ObjectCollision(Rectangle rec);
     CollisionTopAndBottom TopAndBottomCollision();
 };

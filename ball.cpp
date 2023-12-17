@@ -110,3 +110,11 @@ CollisionTopAndBottom Ball::TopAndBottomCollision() {
   return CollisionTopAndBottom{
       {this->position.x, this->position.y}, movingRight, false, false};
 }
+
+void Ball::ResetPosition()
+{
+  position.x = 1920 / 2.0 + 10;
+  position.y = 1080 / 2.0;
+  this->objectCollision = NULL;
+  this->topBottomCollision = NULL;
+}

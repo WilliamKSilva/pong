@@ -14,9 +14,6 @@ bool GameObjectOutOfBounds(Vector2 position) { return position.x <= 0 || positio
 bool TopAndBottomCollision(Vector2 position) {
   return position.y <= 0 || position.y >= 1080;
 }
-void ResetGameObjectPosition(Vector2 &position) {
-  position.x = RES_X / 2.0 + 10;
-}
 
 int main() {
   InitWindow(RES_X, RES_Y, "Best Pong Ever");
@@ -41,7 +38,7 @@ int main() {
     CollisionTopAndBottom topBottomCollision = ball->TopAndBottomCollision();
 
     if (GameObjectOutOfBounds(ball->position)) {
-      ResetGameObjectPosition(ball->position);
+      ball->ResetPosition();
     }
 
     CollisionObject playerCollision = ball->ObjectCollision(Rectangle{player->position.x, player->position.y, (float)player->width, (float)player->height});
