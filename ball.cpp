@@ -65,8 +65,6 @@ void Ball::Move() {
     }
   }
 
-  std::cout << newPosition.x << std::endl;
-
   this->position.x = newPosition.x;
   this->position.y = newPosition.y;
 }

@@ -10,5 +10,5 @@ class Opponent
     int height;
     Color color;
     void Render();
-    void Move(Vector2 playerPosition);
+    void Move(Vector2 ballPosition);
 };

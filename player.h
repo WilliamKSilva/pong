@@ -3,7 +3,11 @@
 class Player {
 public:
   Player(int width, int height, int posX, int posY, Color color);
-  Rectangle shape;
+  Vector2 position;
+  Vector2 speed;
+  int width;
+  int height;
   Color color;
   void Render();
+  void HandleInput();
 };
