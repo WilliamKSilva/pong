@@ -6,7 +6,7 @@ como buildar a lib e as outras dependências necessárias. Link: https://github.
 
 Na raíz do diretório:
 ```
-mkdir Release
+mkdir build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make install
 ```
